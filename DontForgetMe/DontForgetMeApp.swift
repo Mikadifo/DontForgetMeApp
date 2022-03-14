@@ -9,9 +9,22 @@ import SwiftUI
 
 @main
 struct DontForgetMeApp: App {
+    @AppStorage("userEmail") var userEmail: String = ""
+    @StateObject var authentication = Authentication()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Group {
+            if authentication.isValidated {
+                ContentView().environmentObject(authentication)
+            } else {
+                LoginView().environmentObject(authentication)
+            }
+            }.onAppear() {
+                if !userEmail.isEmpty && authentication.user == nil {
+                    authentication.setUserByEmail(email: userEmail)
+                }
+            }
         }
     }
 }

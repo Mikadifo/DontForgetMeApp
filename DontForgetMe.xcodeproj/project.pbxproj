@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3400E01027DAB7D90061C19B /* PasswordResetForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3400E00F27DAB7D90061C19B /* PasswordResetForm.swift */; };
+		3404407E27DACDAC0063EE60 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3404407D27DACDAC0063EE60 /* LoginView.swift */; };
+		3404408027DACF270063EE60 /* CreateAccountForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3404407F27DACF270063EE60 /* CreateAccountForm.swift */; };
+		340DF32E27D97312009201A2 /* DaysSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340DF32D27D97312009201A2 /* DaysSelector.swift */; };
+		345DD08F27D7F74E00A51936 /* ScheduleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DD08E27D7F74E00A51936 /* ScheduleForm.swift */; };
+		345DD09127D7F7CC00A51936 /* EmergencyContactForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DD09027D7F7CC00A51936 /* EmergencyContactForm.swift */; };
+		345DD09427D7F90D00A51936 /* RoundedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DD09327D7F90D00A51936 /* RoundedField.swift */; };
 		348DD25B27D66248006F4B38 /* DontForgetMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD25A27D66248006F4B38 /* DontForgetMeApp.swift */; };
 		348DD25D27D66248006F4B38 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD25C27D66248006F4B38 /* ContentView.swift */; };
 		348DD25F27D66249006F4B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 348DD25E27D66249006F4B38 /* Assets.xcassets */; };
@@ -14,6 +21,22 @@
 		348DD26C27D66249006F4B38 /* DontForgetMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD26B27D66249006F4B38 /* DontForgetMeTests.swift */; };
 		348DD27627D66249006F4B38 /* DontForgetMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD27527D66249006F4B38 /* DontForgetMeUITests.swift */; };
 		348DD27827D66249006F4B38 /* DontForgetMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD27727D66249006F4B38 /* DontForgetMeUITestsLaunchTests.swift */; };
+		348DD28627D6975C006F4B38 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD28527D6975C006F4B38 /* CircleButton.swift */; };
+		348DD28927D69FB2006F4B38 /* ThingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD28827D69FB2006F4B38 /* ThingsView.swift */; };
+		348DD28B27D6A8A7006F4B38 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD28A27D6A8A7006F4B38 /* SchedulesView.swift */; };
+		348DD28D27D6A8D9006F4B38 /* EmergencyContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD28C27D6A8D9006F4B38 /* EmergencyContactsView.swift */; };
+		348DD28F27D6A904006F4B38 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD28E27D6A904006F4B38 /* AccountView.swift */; };
+		348DD29127D6A988006F4B38 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 348DD29027D6A988006F4B38 /* Launch Screen.storyboard */; };
+		348DD29627D6CA5C006F4B38 /* SingleFieldModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD29527D6CA5C006F4B38 /* SingleFieldModal.swift */; };
+		348DD29827D6CF38006F4B38 /* FillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DD29727D6CF38006F4B38 /* FillButton.swift */; };
+		34BD5D5C27D953CF00B73D18 /* ScheduleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BD5D5B27D953CF00B73D18 /* ScheduleRow.swift */; };
+		34BD5D5F27D95BD100B73D18 /* SizedCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BD5D5E27D95BD100B73D18 /* SizedCircleButton.swift */; };
+		34D81D4927DA99CA00E02281 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D81D4827DA99CA00E02281 /* TimePicker.swift */; };
+		34D81D4B27DAA1DE00E02281 /* EmergencyContactsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D81D4A27DAA1DE00E02281 /* EmergencyContactsSelection.swift */; };
+		34EEAFBC27DE1F5E007791E7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EEAFBB27DE1F5E007791E7 /* User.swift */; };
+		34EEAFBE27DE7CEE007791E7 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EEAFBD27DE7CEE007791E7 /* Authentication.swift */; };
+		34EEAFC227DE88EB007791E7 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EEAFC127DE88EB007791E7 /* URL.swift */; };
+		34EEAFC527DEB7FA007791E7 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EEAFC427DEB7FA007791E7 /* Actions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +57,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3400E00F27DAB7D90061C19B /* PasswordResetForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetForm.swift; sourceTree = "<group>"; };
+		3404407D27DACDAC0063EE60 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3404407F27DACF270063EE60 /* CreateAccountForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountForm.swift; sourceTree = "<group>"; };
+		340DF32D27D97312009201A2 /* DaysSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSelector.swift; sourceTree = "<group>"; };
+		345DD08E27D7F74E00A51936 /* ScheduleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleForm.swift; sourceTree = "<group>"; };
+		345DD09027D7F7CC00A51936 /* EmergencyContactForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactForm.swift; sourceTree = "<group>"; };
+		345DD09327D7F90D00A51936 /* RoundedField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedField.swift; sourceTree = "<group>"; };
 		348DD25727D66248006F4B38 /* DontForgetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DontForgetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		348DD25A27D66248006F4B38 /* DontForgetMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetMeApp.swift; sourceTree = "<group>"; };
 		348DD25C27D66248006F4B38 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +74,22 @@
 		348DD27127D66249006F4B38 /* DontForgetMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DontForgetMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		348DD27527D66249006F4B38 /* DontForgetMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetMeUITests.swift; sourceTree = "<group>"; };
 		348DD27727D66249006F4B38 /* DontForgetMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontForgetMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		348DD28527D6975C006F4B38 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		348DD28827D69FB2006F4B38 /* ThingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingsView.swift; sourceTree = "<group>"; };
+		348DD28A27D6A8A7006F4B38 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
+		348DD28C27D6A8D9006F4B38 /* EmergencyContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactsView.swift; sourceTree = "<group>"; };
+		348DD28E27D6A904006F4B38 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		348DD29027D6A988006F4B38 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		348DD29527D6CA5C006F4B38 /* SingleFieldModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFieldModal.swift; sourceTree = "<group>"; };
+		348DD29727D6CF38006F4B38 /* FillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillButton.swift; sourceTree = "<group>"; };
+		34BD5D5B27D953CF00B73D18 /* ScheduleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRow.swift; sourceTree = "<group>"; };
+		34BD5D5E27D95BD100B73D18 /* SizedCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedCircleButton.swift; sourceTree = "<group>"; };
+		34D81D4827DA99CA00E02281 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		34D81D4A27DAA1DE00E02281 /* EmergencyContactsSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactsSelection.swift; sourceTree = "<group>"; };
+		34EEAFBB27DE1F5E007791E7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		34EEAFBD27DE7CEE007791E7 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		34EEAFC127DE88EB007791E7 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		34EEAFC427DEB7FA007791E7 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +117,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		345DD09227D7F8C500A51936 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				348DD28527D6975C006F4B38 /* CircleButton.swift */,
+				345DD09327D7F90D00A51936 /* RoundedField.swift */,
+				34D81D4827DA99CA00E02281 /* TimePicker.swift */,
+				34BD5D5E27D95BD100B73D18 /* SizedCircleButton.swift */,
+				348DD29727D6CF38006F4B38 /* FillButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		348DD24E27D66248006F4B38 = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +152,12 @@
 		348DD25927D66248006F4B38 /* DontForgetMe */ = {
 			isa = PBXGroup;
 			children = (
+				34EEAFBA27DE1F48007791E7 /* API */,
+				345DD09227D7F8C500A51936 /* Components */,
+				348DD29327D6CA28006F4B38 /* Partials */,
 				348DD25A27D66248006F4B38 /* DontForgetMeApp.swift */,
-				348DD25C27D66248006F4B38 /* ContentView.swift */,
+				348DD29027D6A988006F4B38 /* Launch Screen.storyboard */,
+				348DD28727D69F35006F4B38 /* Views */,
 				348DD25E27D66249006F4B38 /* Assets.xcassets */,
 				348DD26027D66249006F4B38 /* Preview Content */,
 			);
@@ -125,6 +187,45 @@
 				348DD27727D66249006F4B38 /* DontForgetMeUITestsLaunchTests.swift */,
 			);
 			path = DontForgetMeUITests;
+			sourceTree = "<group>";
+		};
+		348DD28727D69F35006F4B38 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				348DD25C27D66248006F4B38 /* ContentView.swift */,
+				348DD28827D69FB2006F4B38 /* ThingsView.swift */,
+				3404407D27DACDAC0063EE60 /* LoginView.swift */,
+				348DD28A27D6A8A7006F4B38 /* SchedulesView.swift */,
+				3404407F27DACF270063EE60 /* CreateAccountForm.swift */,
+				348DD28C27D6A8D9006F4B38 /* EmergencyContactsView.swift */,
+				348DD28E27D6A904006F4B38 /* AccountView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		348DD29327D6CA28006F4B38 /* Partials */ = {
+			isa = PBXGroup;
+			children = (
+				345DD09027D7F7CC00A51936 /* EmergencyContactForm.swift */,
+				348DD29527D6CA5C006F4B38 /* SingleFieldModal.swift */,
+				345DD08E27D7F74E00A51936 /* ScheduleForm.swift */,
+				340DF32D27D97312009201A2 /* DaysSelector.swift */,
+				3400E00F27DAB7D90061C19B /* PasswordResetForm.swift */,
+				34D81D4A27DAA1DE00E02281 /* EmergencyContactsSelection.swift */,
+				34BD5D5B27D953CF00B73D18 /* ScheduleRow.swift */,
+			);
+			path = Partials;
+			sourceTree = "<group>";
+		};
+		34EEAFBA27DE1F48007791E7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				34EEAFBB27DE1F5E007791E7 /* User.swift */,
+				34EEAFC127DE88EB007791E7 /* URL.swift */,
+				34EEAFBD27DE7CEE007791E7 /* Authentication.swift */,
+				34EEAFC427DEB7FA007791E7 /* Actions.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +332,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348DD29127D6A988006F4B38 /* Launch Screen.storyboard in Resources */,
 				348DD26227D66249006F4B38 /* Preview Assets.xcassets in Resources */,
 				348DD25F27D66249006F4B38 /* Assets.xcassets in Resources */,
 			);
@@ -257,8 +359,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348DD28627D6975C006F4B38 /* CircleButton.swift in Sources */,
+				348DD28D27D6A8D9006F4B38 /* EmergencyContactsView.swift in Sources */,
+				348DD29627D6CA5C006F4B38 /* SingleFieldModal.swift in Sources */,
+				34BD5D5F27D95BD100B73D18 /* SizedCircleButton.swift in Sources */,
+				348DD29827D6CF38006F4B38 /* FillButton.swift in Sources */,
+				345DD08F27D7F74E00A51936 /* ScheduleForm.swift in Sources */,
+				348DD28B27D6A8A7006F4B38 /* SchedulesView.swift in Sources */,
+				345DD09427D7F90D00A51936 /* RoundedField.swift in Sources */,
+				3400E01027DAB7D90061C19B /* PasswordResetForm.swift in Sources */,
+				34EEAFC527DEB7FA007791E7 /* Actions.swift in Sources */,
+				34D81D4927DA99CA00E02281 /* TimePicker.swift in Sources */,
+				34EEAFC227DE88EB007791E7 /* URL.swift in Sources */,
+				34BD5D5C27D953CF00B73D18 /* ScheduleRow.swift in Sources */,
 				348DD25D27D66248006F4B38 /* ContentView.swift in Sources */,
+				345DD09127D7F7CC00A51936 /* EmergencyContactForm.swift in Sources */,
+				348DD28F27D6A904006F4B38 /* AccountView.swift in Sources */,
 				348DD25B27D66248006F4B38 /* DontForgetMeApp.swift in Sources */,
+				3404408027DACF270063EE60 /* CreateAccountForm.swift in Sources */,
+				340DF32E27D97312009201A2 /* DaysSelector.swift in Sources */,
+				3404407E27DACDAC0063EE60 /* LoginView.swift in Sources */,
+				34D81D4B27DAA1DE00E02281 /* EmergencyContactsSelection.swift in Sources */,
+				348DD28927D69FB2006F4B38 /* ThingsView.swift in Sources */,
+				34EEAFBC27DE1F5E007791E7 /* User.swift in Sources */,
+				34EEAFBE27DE7CEE007791E7 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -401,7 +525,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -425,6 +549,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -454,6 +579,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
