@@ -10,7 +10,6 @@ import SwiftUI
 struct SingleFieldModal: View {
     var headline: String
     var placeholder: String
-    @State var fieldInput: String = ""
     @ObservedObject var actionCallback: Actions
     @Binding var showingModal: Bool
     @EnvironmentObject var authentication: Authentication
@@ -18,7 +17,7 @@ struct SingleFieldModal: View {
     var body: some View {
         VStack {
             Text(actionCallback.modalTitle).font(.largeTitle)
-            RoundedField(inputValue: $fieldInput, fieldLabel: headline, placeholder: placeholder).padding()
+            RoundedField(inputValue: $actionCallback.inputValue, fieldLabel: headline, placeholder: placeholder).padding()
             Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding().foregroundColor(.red)
             HStack {
                 Button {
@@ -27,13 +26,17 @@ struct SingleFieldModal: View {
                     FillButton(text: "Cancel", iconName: "xmark", color: .red)
                 }
                 Button {
-                    actionCallback.callAction(authentication: authentication, inputValue: fieldInput)
+                    actionCallback.callAction(authentication: authentication)
                     showingModal = !actionCallback.errorMessage.isEmpty
                 } label: {
-                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue)
-                }
+                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: buttonDisabled())
+                }.disabled(buttonDisabled())
             }
         }
+    }
+    
+    func buttonDisabled() -> Bool {
+        return actionCallback.inputValue == actionCallback.lastValue || actionCallback.inputValue.isEmpty
     }
 }
 

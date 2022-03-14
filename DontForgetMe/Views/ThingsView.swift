@@ -25,6 +25,8 @@ struct ThingsView: View {
                         print("EIDT")
                         actionCallback.setAction(action: Action.updateThing)
                         actionCallback.modalTitle = "Update \(thing)"
+                        actionCallback.lastValue = thing
+                        actionCallback.inputValue = thing
                         showingModal = true
                     }.tint(.blue)
                 }
@@ -36,6 +38,8 @@ struct ThingsView: View {
                     print("NEW")
                     actionCallback.setAction(action: Action.newThing)
                     actionCallback.modalTitle = "New Thing"
+                    actionCallback.lastValue = ""
+                    actionCallback.inputValue = ""
                     showingModal = true
                 } label: {
                     CircleButton(content: Text("\(Image(systemName: "plus"))"))
@@ -69,6 +73,6 @@ struct ThingsView: View {
 
 struct ThingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ThingsView()
+        ThingsView().environmentObject(Authentication())
     }
 }

@@ -15,30 +15,73 @@ class Actions: ObservableObject {
     @Published var action: Action?
     @Published var modalTitle = ""
     @Published var errorMessage = ""
+    @Published var lastValue = ""
+    @Published var inputValue = ""
     
     func setAction(action: Action) {
         self.action = action
     }
     
-    func callAction(authentication: Authentication, inputValue: String) {
+    func callAction(authentication: Authentication) {
         switch action {
         case .newThing:
-            print("NEW")
-            let newArray = authentication.user?.things.filter {thing in thing == inputValue}
-            print(newArray!.isEmpty)
-            if newArray!.isEmpty {
+            var newUser = authentication.user
+            let newArray = newUser?.things.filter { thing in
+                thing.lowercased() == inputValue.lowercased()
+            }
+            if !newArray!.isEmpty {
                 errorMessage = "\(inputValue) already exists"
             } else {
-                authentication.user?.things.append(inputValue)
+                if newUser != nil {
+                    errorMessage = ""
+                    newUser?.things.append(inputValue)
+                    updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                    if errorMessage.isEmpty {
+                        authentication.setUser(user: newUser!)
+                    }
+                } else {
+                    errorMessage = "Error adding thing"
+                }
             }
             break
         case .updateThing:
-            print(authentication.user?.username ?? "NO USER")
-            authentication.user?.username = inputValue
-            print("UPDATING")
+            var newUser = authentication.user
+            let newArray = newUser?.things.filter { thing in
+                thing.lowercased() == inputValue.lowercased()
+            }
+            if !newArray!.isEmpty {
+                errorMessage = "\(inputValue) already exists"
+            } else {
+                var valueIndex = -1
+                for (index, thing) in newUser!.things.enumerated() {
+                    if thing.lowercased() == lastValue.lowercased() {
+                        valueIndex = index
+                    }
+                }
+                if newUser != nil && valueIndex != -1 {
+                    errorMessage = ""
+                    newUser?.things[valueIndex] = inputValue
+                    updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                    if errorMessage.isEmpty {
+                        authentication.setUser(user: newUser!)
+                    }
+                } else {
+                    errorMessage = "Error updating \(lastValue)"
+                }
+            }
             break
         default:
             print("NO ACTION")
+        }
+    }
+    
+    func updateUser(userEmail: String, newUser: User) {
+        UserService().updateUser(userEmail: userEmail, newUser: newUser) { (response) in
+            if (!response.statusOk! || response.errorMessagge != nil) {
+                self.errorMessage = response.errorMessagge!
+            } else {
+                self.errorMessage = ""
+            }
         }
     }
 }

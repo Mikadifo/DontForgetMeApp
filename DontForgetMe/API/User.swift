@@ -56,4 +56,22 @@ class UserService: ObservableObject {
             }
         }.resume()
     }
+    
+    func updateUser(userEmail: String, newUser: User, completion: @escaping (Response) -> ()) {
+        let finalBody = try? JSONEncoder().encode(newUser)
+        
+        let url = URL(string: API().URL_UPDATE_USER + userEmail)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            let responseData = try! JSONDecoder().decode(Response.self, from: data!)
+            print("RES 1: \(responseData)")
+            DispatchQueue.main.async {
+                completion(responseData)
+            }
+        }.resume()
+    }
 }
