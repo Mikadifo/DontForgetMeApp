@@ -14,35 +14,40 @@ struct ThingsView: View {
     @EnvironmentObject var authentication: Authentication
     
     var body: some View {
-        List(authentication.user?.things ?? [], id: \.self) { thing in
-            Text(thing)
-                .swipeActions(allowsFullSwipe: true) {
-                    Button("Remove") {
-                        print("DELETING")
-                        showingAlert = true
-                    }.tint(.red)
-                    Button("Edit") {
-                        print("EIDT")
-                        actionCallback.setAction(action: Action.updateThing)
-                        actionCallback.modalTitle = "Update \(thing)"
-                        actionCallback.lastValue = thing
-                        actionCallback.inputValue = thing
-                        showingModal = true
-                    }.tint(.blue)
-                }
+        var component: AnyView
+        if authentication.user?.things == nil || authentication.user!.things.isEmpty {
+            component = AnyView(Text("You don't have any things yet, press the + button to add one.").font(.largeTitle).padding())
+        } else {
+            component = AnyView(List(authentication.user?.things ?? [], id: \.self) { thing in
+                Text(thing)
+                    .swipeActions(allowsFullSwipe: true) {
+                        Button("Remove") {
+                            actionCallback.setAction(action: Action.deleteThing)
+                            actionCallback.inputValue = thing
+                            showingAlert = true
+                        }.tint(Color("Red"))
+                        Button("Edit") {
+                            actionCallback.setAction(action: Action.updateThing)
+                            actionCallback.modalTitle = "Update \(thing)"
+                            actionCallback.lastValue = thing
+                            actionCallback.inputValue = thing
+                            showingModal = true
+                        }.tint(Color("Blue"))
+                    }
+                })
         }
-        .overlay(
+        
+        return component.overlay(
             HStack {
                 Spacer()
                 Button {
-                    print("NEW")
                     actionCallback.setAction(action: Action.newThing)
                     actionCallback.modalTitle = "New Thing"
                     actionCallback.lastValue = ""
                     actionCallback.inputValue = ""
                     showingModal = true
                 } label: {
-                    CircleButton(content: Text("\(Image(systemName: "plus"))"))
+                    CircleButton(content: Text("\(Image(systemName: "plus"))"), color: Color("Orange"))
                         .frame(width: 80, height: 80)
                         .padding([.trailing], 25)
                         .padding([.bottom], 100)
@@ -51,10 +56,10 @@ struct ThingsView: View {
         )
         .alert(isPresented: $showingAlert) {
             Alert(
-                title: Text("Deleting {thing.name} ..."),
+                title: Text("Deleting \(actionCallback.inputValue)"),
                 message: Text("Are you sure tu delete this item ?"),
                 primaryButton: .destructive(Text("Delete")) {
-                    print("Deleted ITEM")
+                    actionCallback.callAction(authentication: authentication)
                 },
                 secondaryButton: .cancel()
             )
@@ -73,6 +78,9 @@ struct ThingsView: View {
 
 struct ThingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ThingsView().environmentObject(Authentication())
+        let auth = Authentication()
+        auth.user = User(username: "Mikad", email: "mfdsa@fsdafa", phone: "749821798", password: "fdsafa", things: ["keys"], emergencyContacts: [], schedules: [])
+        
+        return ThingsView().environmentObject(auth)
     }
 }

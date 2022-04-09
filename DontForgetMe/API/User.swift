@@ -7,14 +7,31 @@
 
 import Foundation
 
+struct Contact: Codable, Identifiable {
+    var id: String?
+    var nickname: String
+    var email: String
+}
+
+struct Schedule: Codable, Identifiable {
+    var id: String?
+    var name: String
+    var days: [String]
+    var time: String
+}
+
 struct User: Codable {
     var username: String
     var email: String
     var phone: String
     var password: String
     var things: [String]
-    var emergencyContacts: [String]
-    //var schedules: [String]
+    var emergencyContacts: [Contact]
+    var schedules: [Schedule]
+}
+
+func emptyUser() -> User {
+    return User(username: "", email: "", phone: "", password: "", things: [], emergencyContacts: [], schedules: [])
 }
 
 struct Response: Codable {
@@ -31,7 +48,6 @@ class UserService: ObservableObject {
         let url = URL(string: API().URL_USER_BY_EMAIL + email)!
         URLSession.shared.dataTask(with: url) { data, response, error in
             let responseData = try! JSONDecoder().decode(Response.self, from: data!)
-            print(responseData)
             DispatchQueue.main.async {
                 completion(responseData)
             }
@@ -50,7 +66,6 @@ class UserService: ObservableObject {
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             let responseData = try! JSONDecoder().decode(Response.self, from: data!)
-            print(responseData)
             DispatchQueue.main.async {
                 completion(responseData)
             }
@@ -68,7 +83,19 @@ class UserService: ObservableObject {
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             let responseData = try! JSONDecoder().decode(Response.self, from: data!)
-            print("RES 1: \(responseData)")
+            DispatchQueue.main.async {
+                completion(responseData)
+            }
+        }.resume()
+    }
+    
+    func deleteUser(userEmail: String, completion: @escaping (Response) -> ()) {
+        let url = URL(string: API().URL_DELETE_USER + userEmail)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            let responseData = try! JSONDecoder().decode(Response.self, from: data!)
             DispatchQueue.main.async {
                 completion(responseData)
             }

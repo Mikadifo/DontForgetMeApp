@@ -9,33 +9,41 @@ import SwiftUI
 
 struct ScheduleForm: View {
     @Binding var showingModal: Bool
-    @State var daysArray: [String] = [] //TODO: Change to user data
-    @State var fieldInput = "" //TODO: Change to user data
-    @State var scheduleTime = Date.now //TODO: Change to user data
+    @ObservedObject var actionCallback: ScheduleActions
+    @EnvironmentObject var authentication: Authentication
+    
+    private var disabledSave: Bool {
+        return actionCallback.schedule.name.isEmpty
+        || actionCallback.schedule.days.isEmpty
+    }
     
     var body: some View {
         VStack {
-            Text("Schedule").font(.largeTitle)
-            RoundedField(inputValue: $fieldInput, fieldLabel: "Name", placeholder: "Daily Morning").padding([.top])
-            DaysSelector(daysArray: $daysArray)
-            TimePicker(time: $scheduleTime)
-            //TEST
-            Button {
-                showingModal = false
-                fieldInput = ""
-                print(daysArray)
-            } label: {
-                HStack {
+            Text(actionCallback.modalTitle).font(.largeTitle)
+            RoundedField(inputValue: $actionCallback.schedule.name, fieldLabel: "Name", placeholder: "Daily Morning").padding([.top])
+            DaysSelector(daysArray: $actionCallback.schedule.days)
+            TimePicker(time: $actionCallback.scheduleTime)
+            Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding().foregroundColor(.red)
+            HStack {
+                Button {
+                    showingModal = false
+                    actionCallback.errorMessage = ""
+                } label: {
                     FillButton(text: "Cancel", iconName: "xmark", color: .red)
-                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue)
-                }.padding()
-            }
+                }
+                Button {
+                    actionCallback.callAction(authentication: authentication)
+                    showingModal = !actionCallback.errorMessage.isEmpty
+                } label: {
+                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: disabledSave)
+                }.disabled(disabledSave)
+            }.padding()
         }
     }
 }
 
 struct FormModalView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleForm(showingModal: .constant(false))
+        ScheduleForm(showingModal: .constant(false), actionCallback: ScheduleActions()).environmentObject(Authentication())
     }
 }

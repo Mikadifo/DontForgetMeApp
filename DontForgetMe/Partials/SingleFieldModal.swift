@@ -14,6 +14,10 @@ struct SingleFieldModal: View {
     @Binding var showingModal: Bool
     @EnvironmentObject var authentication: Authentication
     
+    private var disabledButton: Bool {
+        return actionCallback.inputValue == actionCallback.lastValue || actionCallback.inputValue.isEmpty
+    }
+    
     var body: some View {
         VStack {
             Text(actionCallback.modalTitle).font(.largeTitle)
@@ -22,6 +26,7 @@ struct SingleFieldModal: View {
             HStack {
                 Button {
                     showingModal = false
+                    actionCallback.errorMessage = ""
                 } label: {
                     FillButton(text: "Cancel", iconName: "xmark", color: .red)
                 }
@@ -29,14 +34,10 @@ struct SingleFieldModal: View {
                     actionCallback.callAction(authentication: authentication)
                     showingModal = !actionCallback.errorMessage.isEmpty
                 } label: {
-                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: buttonDisabled())
-                }.disabled(buttonDisabled())
+                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: disabledButton)
+                }.disabled(disabledButton)
             }
         }
-    }
-    
-    func buttonDisabled() -> Bool {
-        return actionCallback.inputValue == actionCallback.lastValue || actionCallback.inputValue.isEmpty
     }
 }
 

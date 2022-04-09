@@ -9,31 +9,44 @@ import SwiftUI
 
 struct PasswordResetForm: View {
     @Binding var showingModal: Bool
-    @Binding var currentPassword: String
-    @Binding var newPassword: String
+    @EnvironmentObject var authentication: Authentication
+    @ObservedObject var actionCallback = AccountActions()
+    
+    private var hasEmptyInfo: Bool {
+        return actionCallback.newPassword.isEmpty || actionCallback.currentPassword.isEmpty
+    }
     
     var body: some View {
         VStack {
             Text("Change Password").font(.largeTitle)
-            RoundedField(inputValue: $currentPassword, fieldLabel: "Current Password", placeholder: "", isPassword:  true).padding([.top])
-            RoundedField(inputValue: $currentPassword, fieldLabel: "New Password", placeholder: "", isPassword: true).padding([.top])
+            RoundedField(inputValue: $actionCallback.currentPassword, fieldLabel: "Current Password", placeholder: "", isPassword:  true).padding([.top])
+            RoundedField(inputValue: $actionCallback.newPassword, fieldLabel: "New Password", placeholder: "", isPassword: true).padding([.top])
+            Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding(8).foregroundColor(.red)
             
-            Button {
-                showingModal = false
-                currentPassword = ""
-                newPassword = ""
-            } label: {
-                HStack {
+            HStack {
+                Button {
+                    showingModal = false
+                    actionCallback.errorMessage = ""
+                } label: {
                     FillButton(text: "Cancel", iconName: "xmark", color: .red)
-                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue)
-                }.padding()
-            }
+                }
+                Button {
+                    actionCallback.setAction(action: .updatePassword)
+                    actionCallback.callAction(authentication: authentication)
+                    showingModal = !actionCallback.errorMessage.isEmpty
+                } label: {
+                    FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: hasEmptyInfo)
+                }.disabled(hasEmptyInfo)
+            }.padding()
         }
     }
 }
 
 struct PasswordResetForm_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordResetForm(showingModal: .constant(false), currentPassword: .constant(""), newPassword: .constant(""))
+        let auth = Authentication()
+        auth.user = User(username: "Mikad", email: "mfdsa@fsdafa", phone: "749821798", password: "fdsafa", things: ["keys"], emergencyContacts: [], schedules: [])
+        
+        return PasswordResetForm(showingModal: .constant(false)).environmentObject(auth)
     }
 }

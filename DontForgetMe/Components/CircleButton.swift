@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CircleButton: View {
     var content: Text
+    var color: Color = .gray
     
     var body: some View {
         content
@@ -18,7 +19,7 @@ struct CircleButton: View {
             .foregroundColor(.white)
             .padding()
             .background(
-                Circle().foregroundColor(.gray)
+                Circle().foregroundColor(color)
             )
     }
 }

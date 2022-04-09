@@ -8,7 +8,10 @@
 import Foundation
 
 enum Action {
-    case newThing, updateThing
+    case newThing, updateThing, deleteThing,
+         newSchedule, updateSchedule, removeSchedule,
+         updateAccount, deleteAccount, updatePassword,
+         newContact, updateContact, removeContact
 }
 
 class Actions: ObservableObject {
@@ -70,6 +73,32 @@ class Actions: ObservableObject {
                 }
             }
             break
+        case .deleteThing:
+            var newUser = authentication.user
+            let newArray = newUser?.things.filter { thing in
+                thing.lowercased() == inputValue.lowercased()
+            }
+            if !newArray!.isEmpty {
+                var valueIndex = -1
+                for (index, thing) in newUser!.things.enumerated() {
+                    if thing.lowercased() == inputValue.lowercased() {
+                        valueIndex = index
+                    }
+                }
+                if newUser != nil && valueIndex != -1 {
+                    errorMessage = ""
+                    newUser?.things.remove(at: valueIndex)
+                    updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                    if errorMessage.isEmpty {
+                        authentication.setUser(user: newUser!)
+                    }
+                } else {
+                    errorMessage = "Error deleting \(inputValue)"
+                }
+            } else {
+                errorMessage = "Error deleting \(inputValue)"
+            }
+            break
         default:
             print("NO ACTION")
         }
@@ -77,6 +106,17 @@ class Actions: ObservableObject {
     
     func updateUser(userEmail: String, newUser: User) {
         UserService().updateUser(userEmail: userEmail, newUser: newUser) { (response) in
+            if (!response.statusOk! || response.errorMessagge != nil) {
+                self.errorMessage = response.errorMessagge!
+                print(response.errorMessagge!)
+            } else {
+                self.errorMessage = ""
+            }
+        }
+    }
+    
+    func deleteUser(userEmail: String) {
+        UserService().deleteUser(userEmail: userEmail) { (response) in
             if (!response.statusOk! || response.errorMessagge != nil) {
                 self.errorMessage = response.errorMessagge!
             } else {

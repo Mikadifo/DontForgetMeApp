@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ScheduleRow: View {
-    @Binding var schedule: Schedule
+    var schedule: Schedule
     
     var body: some View {
         VStack {
             HStack {
                 Text(schedule.name)
                 Spacer()
-                Text(schedule.time).bold()
+                Text(schedule.time.split(separator: ",")[0]).bold()
             }
             HStack {
                 ForEach(schedule.days, id: \.self) { day in
                     SizedCircleButton(content: day, width: 30, height: 30, color: .blue)
-                        .padding([.leading, .trailing], 10)
+                        .padding([.leading, .trailing], 8)
                         .padding([.top], 2)
                 }
                 Spacer()
@@ -31,7 +31,7 @@ struct ScheduleRow: View {
 
 struct ScheduleRoew_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleRow(schedule: .constant(Schedule(name: "Daily daily", days: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], time: "17:00", emergencyContacts: ["Test@dfsadf.com"])))
+        ScheduleRow(schedule: Schedule(id: "DM99", name: "Daily daily", days: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], time: "17:00 AM, May 02"))
             .previewLayout(.fixed(width: 400, height: 90))
     }
 }

@@ -14,33 +14,25 @@ struct Day: Identifiable {
 }
 
 class Days: ObservableObject {
-    @Published var list: [Day]
-    
-    init(list: [Day]) {
-        self.list = list
-    }
+    @Published var list = [
+        Day(id: 0, name: "Mo", isSelected: false),
+        Day(id: 1, name: "Tu", isSelected: false),
+        Day(id: 2, name: "We", isSelected: false),
+        Day(id: 3, name: "Th", isSelected: false),
+        Day(id: 4, name: "Fr", isSelected: false),
+        Day(id: 5, name: "Sa", isSelected: false),
+        Day(id: 6, name: "Su", isSelected: false),
+    ]
 }
-
-private var dayList = [
-    Day(id: 0, name: "Mo", isSelected: false),
-    Day(id: 1, name: "Tu", isSelected: false),
-    Day(id: 2, name: "We", isSelected: false),
-    Day(id: 3, name: "Th", isSelected: false),
-    Day(id: 4, name: "Fr", isSelected: false),
-    Day(id: 5, name: "Sa", isSelected: false),
-    Day(id: 6, name: "Su", isSelected: false),
-]
 
 struct DaysSelector: View {
     @Binding var daysAsStringArray: [String]
-    @StateObject var days: Days
+    @StateObject var days = Days()
     var columns: [GridItem] =
              Array(repeating: .init(.flexible()), count: 4)
     
     init(daysArray: Binding<[String]>) {
         _daysAsStringArray = daysArray
-        _days = StateObject(wrappedValue: Days(list: dayList))
-        setSelectedDays()
     }
     
     var body: some View {
@@ -64,17 +56,25 @@ struct DaysSelector: View {
                     }.padding([.top, .bottom], 20)
                 }
             }
+        }.onAppear() {
+            setSelectedDays()
         }
     }
     
     func setSelectedDays() {
+        print("daysString[]-> \(daysAsStringArray)")
+        print("daysList-> \(days.list)")
         if !daysAsStringArray.isEmpty {
-            dayList.filter { day in
+            days.list.filter { day in
                 return daysAsStringArray.contains { dayName in
                     return day.name == dayName
                 }
             }.forEach { day in
-                dayList[day.id].isSelected = true
+                days.list[day.id].isSelected = true
+            }
+        } else {
+            days.list.forEach { day in
+                days.list[day.id].isSelected = false
             }
         }
     }
