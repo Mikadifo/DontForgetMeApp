@@ -11,6 +11,21 @@
 		3404407E27DACDAC0063EE60 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3404407D27DACDAC0063EE60 /* LoginView.swift */; };
 		3404408027DACF270063EE60 /* CreateAccountForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3404407F27DACF270063EE60 /* CreateAccountForm.swift */; };
 		340DF32E27D97312009201A2 /* DaysSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340DF32D27D97312009201A2 /* DaysSelector.swift */; };
+		343734CA2814EFB60054AB8F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343734C92814EFB60054AB8F /* Toast.swift */; };
+		343734CD2814F09D0054AB8F /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343734CC2814F09D0054AB8F /* Validations.swift */; };
+		343734CF2814F1BB0054AB8F /* 1024x1024.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734CE2814F1BB0054AB8F /* 1024x1024.jpeg */; };
+		343734D92814F23F0054AB8F /* 152x152.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734D62814F23F0054AB8F /* 152x152.jpeg */; };
+		343734DA2814F23F0054AB8F /* 76x76x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734D72814F23F0054AB8F /* 76x76x.jpeg */; };
+		343734DB2814F23F0054AB8F /* 167x167.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734D82814F23F0054AB8F /* 167x167.jpeg */; };
+		343734DE2814F27A0054AB8F /* 80x80.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734DC2814F27A0054AB8F /* 80x80.jpeg */; };
+		343734DF2814F27A0054AB8F /* 40x40.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734DD2814F27A0054AB8F /* 40x40.jpeg */; };
+		343734E22814F2B40054AB8F /* 29x29.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734E02814F2B40054AB8F /* 29x29.jpeg */; };
+		343734E32814F2B40054AB8F /* 58x58.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734E12814F2B40054AB8F /* 58x58.jpeg */; };
+		343734E52814F2DF0054AB8F /* 120x120.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734E42814F2DF0054AB8F /* 120x120.jpeg */; };
+		343734E72814F3040054AB8F /* 87x87.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734E62814F3040054AB8F /* 87x87.jpeg */; };
+		343734E92814F3270054AB8F /* 180x180.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734E82814F3270054AB8F /* 180x180.jpeg */; };
+		343734EB2814F3430054AB8F /* 60x60.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734EA2814F3430054AB8F /* 60x60.jpeg */; };
+		343734ED2814F3570054AB8F /* 20x20.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 343734EC2814F3570054AB8F /* 20x20.jpeg */; };
 		345DD08F27D7F74E00A51936 /* ScheduleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DD08E27D7F74E00A51936 /* ScheduleForm.swift */; };
 		345DD09127D7F7CC00A51936 /* EmergencyContactForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DD09027D7F7CC00A51936 /* EmergencyContactForm.swift */; };
 		345DD09427D7F90D00A51936 /* RoundedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DD09327D7F90D00A51936 /* RoundedField.swift */; };
@@ -63,6 +78,21 @@
 		3404407D27DACDAC0063EE60 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3404407F27DACF270063EE60 /* CreateAccountForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountForm.swift; sourceTree = "<group>"; };
 		340DF32D27D97312009201A2 /* DaysSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSelector.swift; sourceTree = "<group>"; };
+		343734C92814EFB60054AB8F /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		343734CC2814F09D0054AB8F /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
+		343734CE2814F1BB0054AB8F /* 1024x1024.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1024x1024.jpeg; sourceTree = "<group>"; };
+		343734D62814F23F0054AB8F /* 152x152.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 152x152.jpeg; sourceTree = "<group>"; };
+		343734D72814F23F0054AB8F /* 76x76x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 76x76x.jpeg; sourceTree = "<group>"; };
+		343734D82814F23F0054AB8F /* 167x167.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 167x167.jpeg; sourceTree = "<group>"; };
+		343734DC2814F27A0054AB8F /* 80x80.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 80x80.jpeg; sourceTree = "<group>"; };
+		343734DD2814F27A0054AB8F /* 40x40.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 40x40.jpeg; sourceTree = "<group>"; };
+		343734E02814F2B40054AB8F /* 29x29.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 29x29.jpeg; sourceTree = "<group>"; };
+		343734E12814F2B40054AB8F /* 58x58.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 58x58.jpeg; sourceTree = "<group>"; };
+		343734E42814F2DF0054AB8F /* 120x120.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 120x120.jpeg; sourceTree = "<group>"; };
+		343734E62814F3040054AB8F /* 87x87.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 87x87.jpeg; sourceTree = "<group>"; };
+		343734E82814F3270054AB8F /* 180x180.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 180x180.jpeg; sourceTree = "<group>"; };
+		343734EA2814F3430054AB8F /* 60x60.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 60x60.jpeg; sourceTree = "<group>"; };
+		343734EC2814F3570054AB8F /* 20x20.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 20x20.jpeg; sourceTree = "<group>"; };
 		345DD08E27D7F74E00A51936 /* ScheduleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleForm.swift; sourceTree = "<group>"; };
 		345DD09027D7F7CC00A51936 /* EmergencyContactForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactForm.swift; sourceTree = "<group>"; };
 		345DD09327D7F90D00A51936 /* RoundedField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedField.swift; sourceTree = "<group>"; };
@@ -121,6 +151,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		343734BA2814EE9B0054AB8F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				343734EC2814F3570054AB8F /* 20x20.jpeg */,
+				343734E02814F2B40054AB8F /* 29x29.jpeg */,
+				343734DD2814F27A0054AB8F /* 40x40.jpeg */,
+				343734E12814F2B40054AB8F /* 58x58.jpeg */,
+				343734EA2814F3430054AB8F /* 60x60.jpeg */,
+				343734D72814F23F0054AB8F /* 76x76x.jpeg */,
+				343734DC2814F27A0054AB8F /* 80x80.jpeg */,
+				343734E62814F3040054AB8F /* 87x87.jpeg */,
+				343734E42814F2DF0054AB8F /* 120x120.jpeg */,
+				343734D62814F23F0054AB8F /* 152x152.jpeg */,
+				343734D82814F23F0054AB8F /* 167x167.jpeg */,
+				343734E82814F3270054AB8F /* 180x180.jpeg */,
+				343734CE2814F1BB0054AB8F /* 1024x1024.jpeg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		343734CB2814F08A0054AB8F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				343734CC2814F09D0054AB8F /* Validations.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		345DD09227D7F8C500A51936 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +187,7 @@
 				34D81D4827DA99CA00E02281 /* TimePicker.swift */,
 				34BD5D5E27D95BD100B73D18 /* SizedCircleButton.swift */,
 				348DD29727D6CF38006F4B38 /* FillButton.swift */,
+				343734C92814EFB60054AB8F /* Toast.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -156,6 +215,8 @@
 		348DD25927D66248006F4B38 /* DontForgetMe */ = {
 			isa = PBXGroup;
 			children = (
+				343734CB2814F08A0054AB8F /* Utils */,
+				343734BA2814EE9B0054AB8F /* Resources */,
 				34EEAFBA27DE1F48007791E7 /* API */,
 				345DD09227D7F8C500A51936 /* Components */,
 				348DD29327D6CA28006F4B38 /* Partials */,
@@ -338,9 +399,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343734E22814F2B40054AB8F /* 29x29.jpeg in Resources */,
+				343734CF2814F1BB0054AB8F /* 1024x1024.jpeg in Resources */,
+				343734DA2814F23F0054AB8F /* 76x76x.jpeg in Resources */,
+				343734D92814F23F0054AB8F /* 152x152.jpeg in Resources */,
+				343734E32814F2B40054AB8F /* 58x58.jpeg in Resources */,
 				348DD29127D6A988006F4B38 /* Launch Screen.storyboard in Resources */,
+				343734E52814F2DF0054AB8F /* 120x120.jpeg in Resources */,
+				343734EB2814F3430054AB8F /* 60x60.jpeg in Resources */,
 				348DD26227D66249006F4B38 /* Preview Assets.xcassets in Resources */,
 				348DD25F27D66249006F4B38 /* Assets.xcassets in Resources */,
+				343734ED2814F3570054AB8F /* 20x20.jpeg in Resources */,
+				343734DE2814F27A0054AB8F /* 80x80.jpeg in Resources */,
+				343734E92814F3270054AB8F /* 180x180.jpeg in Resources */,
+				343734DB2814F23F0054AB8F /* 167x167.jpeg in Resources */,
+				343734DF2814F27A0054AB8F /* 40x40.jpeg in Resources */,
+				343734E72814F3040054AB8F /* 87x87.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +445,7 @@
 				348DD29627D6CA5C006F4B38 /* SingleFieldModal.swift in Sources */,
 				34BD5D5F27D95BD100B73D18 /* SizedCircleButton.swift in Sources */,
 				348DD29827D6CF38006F4B38 /* FillButton.swift in Sources */,
+				343734CD2814F09D0054AB8F /* Validations.swift in Sources */,
 				345DD08F27D7F74E00A51936 /* ScheduleForm.swift in Sources */,
 				348DD28B27D6A8A7006F4B38 /* SchedulesView.swift in Sources */,
 				345DD09427D7F90D00A51936 /* RoundedField.swift in Sources */,
@@ -381,6 +456,7 @@
 				34ABAC7527E5266D00777F44 /* AccountActions.swift in Sources */,
 				34A95C0C27ECC89B00DC7990 /* ContactsActions.swift in Sources */,
 				34BD5D5C27D953CF00B73D18 /* ScheduleRow.swift in Sources */,
+				343734CA2814EFB60054AB8F /* Toast.swift in Sources */,
 				348DD25D27D66248006F4B38 /* ContentView.swift in Sources */,
 				345DD09127D7F7CC00A51936 /* EmergencyContactForm.swift in Sources */,
 				348DD28F27D6A904006F4B38 /* AccountView.swift in Sources */,
