@@ -21,8 +21,9 @@ struct PasswordResetForm: View {
             Text("Change Password").font(.largeTitle)
             RoundedField(inputValue: $actionCallback.currentPassword, fieldLabel: "Current Password", placeholder: "", isPassword:  true).padding([.top])
             RoundedField(inputValue: $actionCallback.newPassword, fieldLabel: "New Password", placeholder: "", isPassword: true).padding([.top])
-            Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding(8).foregroundColor(.red)
-            
+            if !actionCallback.errorMessage.isEmpty {
+                Text(actionCallback.errorMessage).font(.headline).padding().foregroundColor(.red)
+            }
             HStack {
                 Button {
                     showingModal = false
@@ -38,7 +39,7 @@ struct PasswordResetForm: View {
                     FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: hasEmptyInfo)
                 }.disabled(hasEmptyInfo)
             }.padding()
-        }
+        }.onTapGesture{ hideKeyboard() }
     }
 }
 

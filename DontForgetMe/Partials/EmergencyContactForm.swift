@@ -14,15 +14,23 @@ struct EmergencyContactForm: View {
     
     private var disabledSave: Bool {
         return actionCallback.contact.nickname.isEmpty
-        || actionCallback.contact.email.isEmpty
+        || actionCallback.contact.email.isEmpty || !validEmail
+    }
+    
+    private var validEmail: Bool {
+        let email = actionCallback.contact.email
+        if email.isEmpty { return true }
+        return Validation.isValid(text: email, pattern: Validation.EMAIL)
     }
     
     var body: some View {
         VStack {
             Text("Emergency Contact").font(.largeTitle)
             RoundedField(inputValue: $actionCallback.contact.nickname, fieldLabel: "Nickname", placeholder: "Mom, Son, Anna").padding([.top])
-            RoundedField(inputValue: $actionCallback.contact.email, fieldLabel: "Email", placeholder: "example@exp.com").padding([.top, .bottom])
-            Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding().foregroundColor(.red)
+            RoundedField(inputValue: $actionCallback.contact.email, fieldLabel: "Email", placeholder: "example@exp.com", invalid: !validEmail).padding([.top, .bottom])
+            if !actionCallback.errorMessage.isEmpty {
+                Text(actionCallback.errorMessage).font(.headline).padding().foregroundColor(.red)
+            }
             HStack {
                 Button {
                     showingModal = false
@@ -37,7 +45,7 @@ struct EmergencyContactForm: View {
                     FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: disabledSave)
                 }.disabled(disabledSave)
             }.padding()
-        }
+        }.onTapGesture{ hideKeyboard() }
     }
 }
 

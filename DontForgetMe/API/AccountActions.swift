@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 class AccountActions: ObservableObject {
     static var updatedUser: User = emptyUser()
@@ -24,17 +25,38 @@ class AccountActions: ObservableObject {
     func callAction(authentication: Authentication) {
         switch action {
         case .updateAccount:
-            if user.username.isEmpty || user.email.isEmpty || user.phone.isEmpty {
-                errorMessage = "User info is empty"
-                break
-            }
             let actions = Actions()
-            actions.updateUser(userEmail: authentication.user!.email, newUser: user)
-            errorMessage = actions.errorMessage
-            if errorMessage.isEmpty {
-                authentication.setUser(user: user)
-                UserDefaults.standard.set(user.email, forKey: "userEmail")
-                AccountActions.updatedUser = user
+            errorMessage = ""
+            if user.username != authentication.user?.username
+                || user.email != authentication.user?.email
+                || user.phone != authentication.user?.phone {
+                let updatedUsername = user.username != authentication.user?.username ? user.username : ""
+                let updatedEmail = user.email != authentication.user?.email ? user.email : ""
+                let updatedPhone = user.phone != authentication.user?.phone ? user.phone : ""
+                UserService().userByPersonalInfo(email: updatedEmail, username: updatedUsername, phone: updatedPhone) { [self] (response) in
+                    if (response.statusOk! || response.user != nil) {
+                        errorMessage = "User already exists with this information"
+                        return
+                    } else {
+                        errorMessage = ""
+                    }
+                    actions.updateUser(userEmail: authentication.user!.email, newUser: user)
+                    errorMessage = actions.errorMessage
+                    if errorMessage.isEmpty {
+                        authentication.setUser(user: user)
+                        UserDefaults.standard.set(user.email, forKey: "userEmail")
+                        AccountActions.updatedUser = user
+                        authentication.updateToast(showing: true, message: "Account updated")
+                    }
+                }
+            } else {
+                actions.updateUser(userEmail: authentication.user!.email, newUser: user)
+                errorMessage = actions.errorMessage
+                if errorMessage.isEmpty {
+                    authentication.setUser(user: user)
+                    UserDefaults.standard.set(user.email, forKey: "userEmail")
+                    AccountActions.updatedUser = user
+                }
             }
             break
         case .updatePassword:
@@ -53,6 +75,7 @@ class AccountActions: ObservableObject {
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
                         AccountActions.updatedUser = newUser!
+                        authentication.updateToast(showing: true, message: "Password updated")
                     }
                 } else {
                     errorMessage = "Error updating password"
@@ -68,6 +91,11 @@ class AccountActions: ObservableObject {
                 actions.deleteUser(userEmail: authentication.user!.email)
                 errorMessage = actions.errorMessage
                 if errorMessage.isEmpty {
+                    authentication.user?.schedules.forEach { schedule in
+                        ScheduleActions.removeScheduleNotifications(notificationIds: schedule.notifications)
+                    }
+                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     authentication.setUser(user: emptyUser())
                     authentication.updateValidation(success: false)
                     UserDefaults.standard.set("", forKey: "userEmail")
@@ -77,7 +105,7 @@ class AccountActions: ObservableObject {
             }
             break
         default:
-            print("NOT OPTION FOUND")
+            authentication.updateToast(showing: true, message: "Can't found option (\(String(describing: action)))")
         }
     }
 }

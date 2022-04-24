@@ -22,7 +22,9 @@ struct SingleFieldModal: View {
         VStack {
             Text(actionCallback.modalTitle).font(.largeTitle)
             RoundedField(inputValue: $actionCallback.inputValue, fieldLabel: headline, placeholder: placeholder).padding()
-            Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding().foregroundColor(.red)
+            if !actionCallback.errorMessage.isEmpty {
+                Text(actionCallback.errorMessage).font(.headline).padding().foregroundColor(.red)
+            }
             HStack {
                 Button {
                     showingModal = false
@@ -38,6 +40,7 @@ struct SingleFieldModal: View {
                 }.disabled(disabledButton)
             }
         }
+        .onTapGesture { hideKeyboard() }
     }
 }
 

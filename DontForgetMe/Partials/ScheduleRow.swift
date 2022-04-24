@@ -31,7 +31,7 @@ struct ScheduleRow: View {
 
 struct ScheduleRoew_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleRow(schedule: Schedule(id: "DM99", name: "Daily daily", days: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], time: "17:00 AM, May 02"))
+        ScheduleRow(schedule: Schedule(id: "DM99", name: "Daily daily", days: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], time: "17:00 AM, May 02", notifications: []))
             .previewLayout(.fixed(width: 400, height: 90))
     }
 }

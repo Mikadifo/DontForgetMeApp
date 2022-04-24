@@ -41,6 +41,7 @@ class Actions: ObservableObject {
                     updateUser(userEmail: authentication.user!.email, newUser: newUser!)
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
+                        authentication.updateToast(showing: true, message: "\(inputValue) created")
                     }
                 } else {
                     errorMessage = "Error adding thing"
@@ -67,6 +68,7 @@ class Actions: ObservableObject {
                     updateUser(userEmail: authentication.user!.email, newUser: newUser!)
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
+                        authentication.updateToast(showing: true, message: "\(inputValue) updated")
                     }
                 } else {
                     errorMessage = "Error updating \(lastValue)"
@@ -91,6 +93,7 @@ class Actions: ObservableObject {
                     updateUser(userEmail: authentication.user!.email, newUser: newUser!)
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
+                        authentication.updateToast(showing: true, message: "\(inputValue) deleted")
                     }
                 } else {
                     errorMessage = "Error deleting \(inputValue)"
@@ -100,7 +103,7 @@ class Actions: ObservableObject {
             }
             break
         default:
-            print("NO ACTION")
+            authentication.updateToast(showing: true, message: "Can't found option (\(String(describing: action)))")
         }
     }
     
@@ -108,7 +111,6 @@ class Actions: ObservableObject {
         UserService().updateUser(userEmail: userEmail, newUser: newUser) { (response) in
             if (!response.statusOk! || response.errorMessagge != nil) {
                 self.errorMessage = response.errorMessagge!
-                print(response.errorMessagge!)
             } else {
                 self.errorMessage = ""
             }

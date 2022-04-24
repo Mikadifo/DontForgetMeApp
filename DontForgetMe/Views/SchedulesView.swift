@@ -7,54 +7,47 @@
 
 import SwiftUI
 
-struct Schedule: Identifiable {
-    var id = UUID()
-    var name: String
-    var days: [String]
-    var time: String
-    var emergencyContacts: [String]
-}
-
-class Schedules: ObservableObject {
-    // TODO: Take from user form
-    //TODO: take days array string and try to pass to edit form and see if updated
-    @Published var list = [
-        Schedule(name:"Daily Morning", days: ["Mo", "Tu", "Fr"], time: "06:19 am", emergencyContacts: ["example@gmail.com"]),
-        Schedule(name:"Daily Evening", days: ["Fr"], time: "06:19 am", emergencyContacts: ["exp.exp@exp.exp", "fasf@fdfa.com"]),
-        Schedule(name:"Daily Free", days: ["Fr", "Sa", "Su"], time: "06:19 am", emergencyContacts: []),
-        Schedule(name:"Dates", days: ["Tu", "Th"], time: "06:19 am", emergencyContacts: []),
-        Schedule(name:"Doctor Appointment", days: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], time: "06:19 am", emergencyContacts: ["person.mail.com", "prueba.dsaf@.com", "fdfa.test.f@cl.com"]),
-    ]
-}
-
 struct SchedulesView: View {
     @State var showingAlert = false
     @State var showingModal = false
-    @State var modalTitle = "New Thing"
-    @StateObject var schedules = Schedules()
+    
+    @StateObject var actionCallback = ScheduleActions()
+    @EnvironmentObject var authentication: Authentication
     
     var body: some View {
-        List(schedules.list) { schedule in
-            ScheduleRow(schedule: getScheduleById(id: schedule.id))
-                .swipeActions(allowsFullSwipe: true) {
-                    Button("Remove") {
-                        print("DELETING")
-                        showingAlert = true
-                    }.tint(.red)
-                    Button("Edit") {
-                        print("UPDATING")
-                        showingModal = true
-                        modalTitle = "Update \(schedule.name)"
-                    }.tint(.blue)
-                }
+        var component: AnyView
+        if authentication.user?.schedules == nil || authentication.user!.schedules.isEmpty {
+            component = AnyView(Text("You don't have any schedules yet, press the + button to add one.").font(.largeTitle).padding())
+        } else {
+            component = AnyView(List(authentication.user?.schedules ?? []) { schedule in
+                ScheduleRow(schedule: getScheduleById(id: schedule.id!))
+                    .swipeActions(allowsFullSwipe: true) {
+                        Button("Remove") {
+                            actionCallback.setAction(action: Action.removeSchedule)
+                            actionCallback.schedule = schedule
+                            showingAlert = true
+                        }.tint(Color("Red"))
+                        Button("Edit") {
+                            actionCallback.setAction(action: Action.updateSchedule)
+                            actionCallback.modalTitle = "Update \(schedule.name)"
+                            actionCallback.scheduleTime = SchedulesView.getFormattedDate(time: schedule.time)
+                            actionCallback.schedule = schedule
+                            showingModal = true
+                        }.tint(Color("Blue"))
+                    }
+            })
         }
-        .overlay(
+        return component.overlay(
             HStack {
                 Spacer()
                 Button {
+                    actionCallback.setAction(action: Action.newSchedule)
+                    actionCallback.modalTitle = "New Schedule"
+                    actionCallback.schedule = Schedule(name: "", days: [], time: "", notifications: [])
+                    actionCallback.scheduleTime = Date.now
                     showingModal = true
                 } label: {
-                    CircleButton(content: Text("\(Image(systemName: "plus"))"))
+                    CircleButton(content: Text("\(Image(systemName: "plus"))"), color: Color("Orange"))
                         .frame(width: 80, height: 80)
                         .padding([.trailing], 25)
                         .padding([.bottom], 100)
@@ -63,29 +56,38 @@ struct SchedulesView: View {
         )
         .alert(isPresented: $showingAlert) {
             Alert(
-                title: Text("Deleting {schedule.name} ..."),
+                title: Text("Deleting \(actionCallback.schedule.name)"),
                 message: Text("Are you sure tu delete this item ?"),
                 primaryButton: .destructive(Text("Delete")) {
-                    print("Deleted ITEM")
+                    actionCallback.callAction(authentication: authentication)
                 },
                 secondaryButton: .cancel()
             )
         }
         .navigationTitle("My Schedules")
         .sheet(isPresented: $showingModal) {
-            ScheduleForm(showingModal: $showingModal)
+            ScheduleForm(showingModal: $showingModal, actionCallback: actionCallback)
         }
     }
     
-    func getScheduleById(id: UUID) -> Binding<Schedule> {
-        return $schedules.list.filter { schedule in
+    func getScheduleById(id: String) -> Schedule {
+        (authentication.user?.schedules.filter { schedule in
             schedule.id == id
-        }[0]
+        }[0])!
+    }
+    
+    static func getFormattedDate(time: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = DATE_FORMAT
+        return formatter.date(from: time)!
     }
 }
 
 struct SchedulesView_Previews: PreviewProvider {
     static var previews: some View {
-        SchedulesView()
+        let auth = Authentication()
+        auth.user = User(username: "Mikad", email: "mfdsa@fsdafa", phone: "749821798", password: "fdsafa", things: ["keys"], emergencyContacts: [], schedules: [Schedule(id: "0D", name: "name", days: ["Mo", "Tu"], time: "13:00 AM, ...", notifications: [])])
+        
+        return SchedulesView().environmentObject(auth)
     }
 }

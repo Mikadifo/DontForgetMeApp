@@ -12,12 +12,14 @@ struct DontForgetMeApp: App {
     @AppStorage("userEmail") var userEmail: String = ""
     @StateObject var authentication = Authentication()
     @State var notificationAccessGranted = false
+    @State var delegate = NotificationDelegate()
     
     var body: some Scene {
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
                 notificationAccessGranted = granted
         }
+        UNUserNotificationCenter.current().delegate = delegate
         
         return WindowGroup {
             if !notificationAccessGranted {
@@ -43,5 +45,27 @@ struct DontForgetMeApp: App {
                 }
             }
         }
+    }
+}
+
+class NotificationDelegate: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // before show alert call a function to stop time counter for notification
+        print("nOTMAL FROM APP")
+        completionHandler([.badge, .banner, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        if response.actionIdentifier == "FORGOT" {
+            print("FORGOT")
+            completionHandler()
+            return
+            //NOTIFY USERS
+        }
+        
+        // before show alert call a function to stop time counter for notification
+        print("CONTINUE NORMAL")
+        completionHandler()
     }
 }

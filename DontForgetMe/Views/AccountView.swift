@@ -25,12 +25,43 @@ struct AccountView: View {
         authentication.user?.phone != actionCallback.user.phone
     }
     
+    private var buttonDisabled: Bool {
+        return (actionCallback.user.username.isEmpty ||
+                actionCallback.user.email.isEmpty ||
+                actionCallback.user.phone.isEmpty) ||
+               (!validPhone || !validEmail || !validUsername)
+    }
+    
+    private var validEmail: Bool {
+        let range = NSRange(location: 0, length: actionCallback.user.email.utf16.count)
+        let regex = try! NSRegularExpression(pattern: "^\\w+\\.?\\w+@[A-z]+\\.\\w+$")
+
+        if actionCallback.user.email.isEmpty { return true }
+        return regex.firstMatch(in: actionCallback.user.email, options: [], range: range) != nil
+    }
+    
+    private var validUsername: Bool {
+        let range = NSRange(location: 0, length: actionCallback.user.username.utf16.count)
+        let regex = try! NSRegularExpression(pattern: "^[A-z]+\\w+$")
+
+        if actionCallback.user.username.isEmpty { return true }
+        return regex.firstMatch(in: actionCallback.user.username, options: [], range: range) != nil
+    }
+    
+    private var validPhone: Bool {
+        let range = NSRange(location: 0, length: actionCallback.user.phone.utf16.count)
+        let regex = try! NSRegularExpression(pattern: "^\\d{3,15}$")
+
+        if actionCallback.user.phone.isEmpty { return true }
+        return regex.firstMatch(in: actionCallback.user.phone, options: [], range: range) != nil
+    }
+    
     var body: some View {
         ScrollView {
             VStack {
-                RoundedField(inputValue: $actionCallback.user.username, fieldLabel: "Username", placeholder: "Rick_4103").padding([.top])
-                RoundedField(inputValue: $actionCallback.user.email, fieldLabel: "Email", placeholder: "example@exp.com").padding([.top])
-                RoundedField(inputValue: $actionCallback.user.phone, fieldLabel: "Phone", placeholder: "(###) ###-####").padding([.top, .bottom])
+                RoundedField(inputValue: $actionCallback.user.username, fieldLabel: "Username (Only alphanumerics)", placeholder: "Rick_4103", invalid: !validUsername).padding([.top])
+                RoundedField(inputValue: $actionCallback.user.email, fieldLabel: "Email", placeholder: "example@exp.com", invalid: !validEmail).padding([.top])
+                RoundedField(inputValue: $actionCallback.user.phone, fieldLabel: "Phone", placeholder: "1234567891", invalid: !validPhone).padding([.top, .bottom])
                 Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding(8).foregroundColor(.red)
             
                 if dataIsUpdated {
@@ -38,8 +69,8 @@ struct AccountView: View {
                         actionCallback.setAction(action: .updateAccount)
                         actionCallback.callAction(authentication: authentication)
                     } label: {
-                        FillButton(text: "Save Changes", iconName: "square.and.arrow.down", color: .blue, maxWidth: true).padding([.leading, .trailing, .top])
-                    }
+                        FillButton(text: "Save Changes", iconName: "square.and.arrow.down", color: .blue, maxWidth: true, disabled: buttonDisabled).padding([.leading, .trailing, .top])
+                    }.disabled(buttonDisabled)
                 }
                 Button {
                     showingModal = true
@@ -53,6 +84,8 @@ struct AccountView: View {
                     FillButton(text: "Delete Account", iconName: "trash", color: .red, maxWidth: true).padding([.leading, .trailing])
                 }
                 Button {
+                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     authentication.updateValidation(success: false)
                     UserDefaults.standard.set("", forKey: "userEmail")
                 } label: {
@@ -75,6 +108,7 @@ struct AccountView: View {
         }.navigationTitle("My Account")
             .onAppear() {
                 actionCallback.user = authentication.user!
+                actionCallback.errorMessage = ""
             }
     }
 }

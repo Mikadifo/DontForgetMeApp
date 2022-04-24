@@ -18,6 +18,7 @@ struct Schedule: Codable, Identifiable {
     var name: String
     var days: [String]
     var time: String
+    var notifications: [String]
 }
 
 struct User: Codable {
@@ -54,12 +55,47 @@ class UserService: ObservableObject {
         }.resume()
     }
     
+    func userByPersonalInfo(email: String, username: String, phone: String, completion: @escaping (Response) -> ()) {
+        let body: [String: String] = ["username": username, "email": email, "phone": phone]
+        let finalBody = try? JSONSerialization.data(withJSONObject: body)
+        let url = URL(string: API().URL_USER_BY_PERSONAL_INFO)!
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            let responseData = try! JSONDecoder().decode(Response.self, from: data!)
+            DispatchQueue.main.async {
+                completion(responseData)
+            }
+        }.resume()
+    }
+    
     func login(username: String, password: String, completion: @escaping (Response) -> ()) {
         let body: [String: String] = ["username": username, "password": password]
         let finalBody = try? JSONSerialization.data(withJSONObject: body)
-        
         let url = URL(string: API().URL_LOGIN)!
         var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            let responseData = try! JSONDecoder().decode(Response.self, from: data!)
+            DispatchQueue.main.async {
+                completion(responseData)
+            }
+        }.resume()
+    }
+    
+    func createAccount(user: User, completion: @escaping (Response) -> ()) {
+        let finalBody = try? JSONEncoder().encode(user)
+        let url = URL(string: API().URL_CREATE_USER)!
+        var request = URLRequest(url: url)
+        
         request.httpMethod = "POST"
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -74,9 +110,9 @@ class UserService: ObservableObject {
     
     func updateUser(userEmail: String, newUser: User, completion: @escaping (Response) -> ()) {
         let finalBody = try? JSONEncoder().encode(newUser)
-        
         let url = URL(string: API().URL_UPDATE_USER + userEmail)!
         var request = URLRequest(url: url)
+        
         request.httpMethod = "PUT"
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -92,8 +128,8 @@ class UserService: ObservableObject {
     func deleteUser(userEmail: String, completion: @escaping (Response) -> ()) {
         let url = URL(string: API().URL_DELETE_USER + userEmail)!
         var request = URLRequest(url: url)
+        
         request.httpMethod = "DELETE"
-
         URLSession.shared.dataTask(with: request) { data, response, error in
             let responseData = try! JSONDecoder().decode(Response.self, from: data!)
             DispatchQueue.main.async {

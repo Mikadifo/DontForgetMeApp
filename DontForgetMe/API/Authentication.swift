@@ -10,11 +10,18 @@ import SwiftUI
 class Authentication: ObservableObject {
     @Published var isValidated = false
     @Published var user: User?
+    @Published var isShowingToast = false
+    @Published var message: String = ""
     
     func updateValidation(success: Bool) {
         withAnimation {
             isValidated = success
         }
+    }
+    
+    func updateToast(showing: Bool, message: String = "") {
+        self.message = message
+        isShowingToast = showing
     }
     
     func setUser(user: User) {

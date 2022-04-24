@@ -43,6 +43,7 @@ class ContactsActions: ObservableObject {
                 errorMessage = actions.errorMessage
                 if errorMessage.isEmpty {
                     authentication.setUser(user: newUser!)
+                    authentication.updateToast(showing: true, message: "\(contact.nickname) created")
                 }
             } else {
                 errorMessage = "Error adding contact"
@@ -83,6 +84,7 @@ class ContactsActions: ObservableObject {
                         errorMessage = actions.errorMessage
                         if errorMessage.isEmpty {
                             authentication.setUser(user: newUser!)
+                            authentication.updateToast(showing: true, message: "Contact updated")
                         }
                     } else {
                         errorMessage = "Error updating \(contact.nickname)"
@@ -116,6 +118,7 @@ class ContactsActions: ObservableObject {
                         errorMessage = actions.errorMessage
                         if errorMessage.isEmpty {
                             authentication.setUser(user: newUser!)
+                            authentication.updateToast(showing: true, message: "\(contact.nickname) removed")
                         }
                     } else {
                         errorMessage = "Error deleting \(contact.nickname)"
@@ -128,7 +131,7 @@ class ContactsActions: ObservableObject {
             }
             break
         default:
-            print("NOT ACTION FOUND")
+            authentication.updateToast(showing: true, message: "Can't found option (\(String(describing: action)))")
         }
     }
 }

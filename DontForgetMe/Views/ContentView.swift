@@ -49,9 +49,17 @@ struct ContentView: View {
                     }
                 }.padding([.bottom], 100)
             }
-        }
+        }.toast(message: authentication.message, isShowing: $authentication.isShowingToast)
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

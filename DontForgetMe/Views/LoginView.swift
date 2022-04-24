@@ -45,6 +45,10 @@ struct LoginView: View {
             if (response.user != nil) {
                 UserDefaults.standard.set(response.user?.email, forKey: "userEmail")
                 authentication.setUser(user: response.user!)
+                authentication.user?.schedules.forEach { schedule in
+                    _ = ScheduleActions
+                        .setUpNotifications(schedule: schedule, scheduleTime: SchedulesView.getFormattedDate(time: schedule.time), authentication: authentication, notificationIdArray: schedule.notifications)
+                }
             }
             authentication.updateValidation(success: response.statusOk ?? false)
         }
@@ -53,6 +57,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView().environmentObject(Authentication())
     }
 }

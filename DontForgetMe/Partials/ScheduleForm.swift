@@ -19,11 +19,13 @@ struct ScheduleForm: View {
     
     var body: some View {
         VStack {
-            Text(actionCallback.modalTitle).font(.largeTitle)
-            RoundedField(inputValue: $actionCallback.schedule.name, fieldLabel: "Name", placeholder: "Daily Morning").padding([.top])
+            Text(actionCallback.modalTitle).font(.largeTitle).padding()
+            RoundedField(inputValue: $actionCallback.schedule.name, fieldLabel: "Name", placeholder: "Daily Morning")
             DaysSelector(daysArray: $actionCallback.schedule.days)
             TimePicker(time: $actionCallback.scheduleTime)
-            Text(!actionCallback.errorMessage.isEmpty ? actionCallback.errorMessage : "").font(.headline).padding().foregroundColor(.red)
+            if !actionCallback.errorMessage.isEmpty {
+                Text(actionCallback.errorMessage).font(.headline).padding().foregroundColor(.red)
+            }
             HStack {
                 Button {
                     showingModal = false
@@ -38,7 +40,7 @@ struct ScheduleForm: View {
                     FillButton(text: "Save", iconName: "square.and.arrow.down", color: .blue, disabled: disabledSave)
                 }.disabled(disabledSave)
             }.padding()
-        }
+        }.onTapGesture{ hideKeyboard() }
     }
 }
 
