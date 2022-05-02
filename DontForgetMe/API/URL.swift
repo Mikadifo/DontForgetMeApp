@@ -7,7 +7,8 @@
 
 import Foundation
 
-private let URL_BASE = "http://192.168.1.11:8000"
+private let STAGE = "dev"
+private let URL_BASE = "https://0fm6m54ra4.execute-api.us-east-1.amazonaws.com/\(STAGE)"
 
 struct API {
     let URL_LOGIN = URL_BASE + "/login"
