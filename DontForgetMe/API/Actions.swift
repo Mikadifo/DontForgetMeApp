@@ -38,7 +38,7 @@ class Actions: ObservableObject {
                 if newUser != nil {
                     errorMessage = ""
                     newUser?.things.append(inputValue)
-                    updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                    updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
                         authentication.updateToast(showing: true, message: "\(inputValue) created")
@@ -65,7 +65,7 @@ class Actions: ObservableObject {
                 if newUser != nil && valueIndex != -1 {
                     errorMessage = ""
                     newUser?.things[valueIndex] = inputValue
-                    updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                    updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
                         authentication.updateToast(showing: true, message: "\(inputValue) updated")
@@ -90,7 +90,7 @@ class Actions: ObservableObject {
                 if newUser != nil && valueIndex != -1 {
                     errorMessage = ""
                     newUser?.things.remove(at: valueIndex)
-                    updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                    updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
                         authentication.updateToast(showing: true, message: "\(inputValue) deleted")
@@ -107,8 +107,8 @@ class Actions: ObservableObject {
         }
     }
     
-    func updateUser(userEmail: String, newUser: User) {
-        UserService().updateUser(userEmail: userEmail, newUser: newUser) { (response) in
+    func updateUser(userEmail: String, newUser: User, token: String) {
+        UserService().updateUser(userEmail: userEmail, newUser: newUser, token: token) { (response) in
             if (!response.statusOk! || response.errorMessagge != nil) {
                 self.errorMessage = response.errorMessagge!
             } else {
@@ -117,8 +117,8 @@ class Actions: ObservableObject {
         }
     }
     
-    func deleteUser(userEmail: String) {
-        UserService().deleteUser(userEmail: userEmail) { (response) in
+    func deleteUser(userEmail: String, token: String) {
+        UserService().deleteUser(userEmail: userEmail, token: token) { (response) in
             if (!response.statusOk! || response.errorMessagge != nil) {
                 self.errorMessage = response.errorMessagge!
             } else {

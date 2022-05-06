@@ -88,6 +88,7 @@ struct AccountView: View {
                     UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     authentication.updateValidation(success: false)
                     UserDefaults.standard.set("", forKey: "userEmail")
+                    UserDefaults.standard.set("", forKey: "userToken")
                 } label: {
                     FillButton(text: "Log out", iconName: "power", color: .red, maxWidth: true).padding([.leading, .trailing])
                 }

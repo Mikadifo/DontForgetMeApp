@@ -44,7 +44,9 @@ struct LoginView: View {
             self.response = response
             if (response.user != nil) {
                 UserDefaults.standard.set(response.user?.email, forKey: "userEmail")
+                UserDefaults.standard.set(response.token, forKey: "userToken")
                 authentication.setUser(user: response.user!)
+                authentication.updateToken(token: response.token ?? "")
                 authentication.user?.schedules.forEach { schedule in
                     _ = ScheduleActions
                         .setUpNotifications(schedule: schedule, scheduleTime: SchedulesView.getFormattedDate(time: schedule.time), authentication: authentication, notificationIdArray: schedule.notifications)

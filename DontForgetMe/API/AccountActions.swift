@@ -33,14 +33,14 @@ class AccountActions: ObservableObject {
                 let updatedUsername = user.username != authentication.user?.username ? user.username : ""
                 let updatedEmail = user.email != authentication.user?.email ? user.email : ""
                 let updatedPhone = user.phone != authentication.user?.phone ? user.phone : ""
-                UserService().userByPersonalInfo(email: updatedEmail, username: updatedUsername, phone: updatedPhone) { [self] (response) in
+                UserService().userByPersonalInfo(email: updatedEmail, username: updatedUsername, phone: updatedPhone, token: authentication.userToken) { [self] (response) in
                     if (response.statusOk! || response.user != nil) {
                         errorMessage = "User already exists with this information"
                         return
                     } else {
                         errorMessage = ""
                     }
-                    actions.updateUser(userEmail: authentication.user!.email, newUser: user)
+                    actions.updateUser(userEmail: authentication.user!.email, newUser: user, token: authentication.userToken)
                     errorMessage = actions.errorMessage
                     if errorMessage.isEmpty {
                         authentication.setUser(user: user)
@@ -50,7 +50,7 @@ class AccountActions: ObservableObject {
                     }
                 }
             } else {
-                actions.updateUser(userEmail: authentication.user!.email, newUser: user)
+                actions.updateUser(userEmail: authentication.user!.email, newUser: user, token: authentication.userToken)
                 errorMessage = actions.errorMessage
                 if errorMessage.isEmpty {
                     authentication.setUser(user: user)
@@ -70,7 +70,7 @@ class AccountActions: ObservableObject {
                     errorMessage = ""
                     newUser?.password = newPassword
                     let actions = Actions()
-                    actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                    actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                     errorMessage = actions.errorMessage
                     if errorMessage.isEmpty {
                         authentication.setUser(user: newUser!)
@@ -88,7 +88,7 @@ class AccountActions: ObservableObject {
             if authentication.user != nil {
                 errorMessage = ""
                 let actions = Actions()
-                actions.deleteUser(userEmail: authentication.user!.email)
+                actions.deleteUser(userEmail: authentication.user!.email, token: authentication.userToken)
                 errorMessage = actions.errorMessage
                 if errorMessage.isEmpty {
                     authentication.user?.schedules.forEach { schedule in
@@ -99,6 +99,7 @@ class AccountActions: ObservableObject {
                     authentication.setUser(user: emptyUser())
                     authentication.updateValidation(success: false)
                     UserDefaults.standard.set("", forKey: "userEmail")
+                    UserDefaults.standard.set("", forKey: "userToken")
                 }
             } else {
                 errorMessage = "Error deleting password"

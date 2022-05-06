@@ -39,7 +39,7 @@ class ContactsActions: ObservableObject {
                 contact.id = UUID().uuidString
                 newUser?.emergencyContacts.append(contact)
                 let actions = Actions()
-                actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                 errorMessage = actions.errorMessage
                 if errorMessage.isEmpty {
                     authentication.setUser(user: newUser!)
@@ -80,7 +80,7 @@ class ContactsActions: ObservableObject {
                         errorMessage = ""
                         newUser?.emergencyContacts[valueIndex] = contact
                         let actions = Actions()
-                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                         errorMessage = actions.errorMessage
                         if errorMessage.isEmpty {
                             authentication.setUser(user: newUser!)
@@ -114,7 +114,7 @@ class ContactsActions: ObservableObject {
                         errorMessage = ""
                         newUser?.emergencyContacts.remove(at: valueIndex)
                         let actions = Actions()
-                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                         errorMessage = actions.errorMessage
                         if errorMessage.isEmpty {
                             authentication.setUser(user: newUser!)

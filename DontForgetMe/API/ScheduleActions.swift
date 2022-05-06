@@ -36,7 +36,7 @@ class ScheduleActions: ObservableObject {
                 newUser?.schedules.append(schedule)
                 
                 let actions = Actions()
-                actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                 errorMessage = actions.errorMessage
                 if errorMessage.isEmpty {
                     ScheduleActions.removeScheduleNotifications(notificationIds: oldNotifications)
@@ -71,7 +71,7 @@ class ScheduleActions: ObservableObject {
                         newUser?.schedules[valueIndex] = schedule
                         
                         let actions = Actions()
-                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                         errorMessage = actions.errorMessage
                         if errorMessage.isEmpty {
                             ScheduleActions.removeScheduleNotifications(notificationIds: oldNotifications)
@@ -106,7 +106,7 @@ class ScheduleActions: ObservableObject {
                         errorMessage = ""
                         newUser?.schedules.remove(at: valueIndex)
                         let actions = Actions()
-                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!)
+                        actions.updateUser(userEmail: authentication.user!.email, newUser: newUser!, token: authentication.userToken)
                         errorMessage = actions.errorMessage
                         if errorMessage.isEmpty {
                             ScheduleActions.removeScheduleNotifications(notificationIds: schedule.notifications)

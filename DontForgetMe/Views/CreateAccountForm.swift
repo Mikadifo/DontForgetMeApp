@@ -62,6 +62,7 @@ struct CreateAccountForm: View {
             self.response = response
             if (response.user != nil) {
                 UserDefaults.standard.set(response.user?.email, forKey: "userEmail")
+                UserDefaults.standard.set(response.token, forKey: "userToken")
                 authentication.setUser(user: response.user!)
             }
             authentication.updateValidation(success: response.statusOk ?? false)

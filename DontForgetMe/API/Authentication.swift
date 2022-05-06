@@ -12,6 +12,7 @@ class Authentication: ObservableObject {
     @Published var user: User?
     @Published var isShowingToast = false
     @Published var message: String = ""
+    @Published var userToken: String = ""
     
     func updateValidation(success: Bool) {
         withAnimation {
@@ -28,8 +29,12 @@ class Authentication: ObservableObject {
         self.user = user
     }
     
+    func updateToken(token: String) {
+        userToken = token
+    }
+    
     func setUserByEmail(email: String) {
-        UserService().userByEmail(email: email) { (response) in
+        UserService().userByEmail(email: email, token: userToken) { (response) in
             if (response.user != nil) {
                 self.user = response.user
                 self.isValidated = true

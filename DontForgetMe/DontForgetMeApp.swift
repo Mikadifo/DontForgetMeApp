@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct DontForgetMeApp: App {
     @AppStorage("userEmail") var userEmail: String = ""
+    @AppStorage("userToken") var userToken: String = ""
     @StateObject var authentication = Authentication()
     @State var notificationAccessGranted = false
     @State var delegate = NotificationDelegate()
@@ -39,7 +40,8 @@ struct DontForgetMeApp: App {
                         LoginView().environmentObject(authentication)
                     }
                 }.onAppear() {
-                    if !userEmail.isEmpty && authentication.user == nil {
+                    if !userEmail.isEmpty && !userToken.isEmpty && authentication.user == nil {
+                        authentication.updateToken(token: userToken)
                         authentication.setUserByEmail(email: userEmail)
                     }
                 }

@@ -40,14 +40,23 @@ struct Response: Codable {
     var users: [User]?
     var user: User?
     var errorMessagge: String?
+    var token: String?
 }
 
 class UserService: ObservableObject {
     @Published var users = [User]()
     
-    func userByEmail(email: String, completion: @escaping (Response) -> ()) {
+    func userByEmail(email: String, token: String, completion: @escaping (Response) -> ()) {
         let url = URL(string: API().URL_USER_BY_EMAIL + email)!
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        let sessionConfiguration = URLSessionConfiguration.default
+        
+        sessionConfiguration.httpAdditionalHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        request.httpMethod = "GET"
+        
+        URLSession(configuration: sessionConfiguration).dataTask(with: url) { data, response, error in
             let responseData = try! JSONDecoder().decode(Response.self, from: data!)
             DispatchQueue.main.async {
                 completion(responseData)
@@ -55,18 +64,22 @@ class UserService: ObservableObject {
         }.resume()
     }
     
-    func userByPersonalInfo(email: String, username: String, phone: String, completion: @escaping (Response) -> ()) {
+    func userByPersonalInfo(email: String, username: String, phone: String, token: String, completion: @escaping (Response) -> ()) {
         let body: [String: String] = ["username": username, "email": email, "phone": phone]
         let finalBody = try? JSONSerialization.data(withJSONObject: body)
         let url = URL(string: API().URL_USER_BY_PERSONAL_INFO)!
         var request = URLRequest(url: url)
+        let sessionConfiguration = URLSessionConfiguration.default
         
+        sessionConfiguration.httpAdditionalHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
         request.httpMethod = "POST"
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            let responseData = try! JSONDecoder().decode(Response.self, from: data!)
+        URLSession(configuration: sessionConfiguration).dataTask(with: request) { data, response, error in
+            let responseData = try! JSONDecoder().decode(Response.self, from: data!) //TODO: Error AUTH
             DispatchQueue.main.async {
                 completion(responseData)
             }
@@ -108,16 +121,20 @@ class UserService: ObservableObject {
         }.resume()
     }
     
-    func updateUser(userEmail: String, newUser: User, completion: @escaping (Response) -> ()) {
+    func updateUser(userEmail: String, newUser: User, token: String, completion: @escaping (Response) -> ()) {
         let finalBody = try? JSONEncoder().encode(newUser)
         let url = URL(string: API().URL_UPDATE_USER + userEmail)!
         var request = URLRequest(url: url)
+        let sessionConfiguration = URLSessionConfiguration.default
         
+        sessionConfiguration.httpAdditionalHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
         request.httpMethod = "PUT"
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession(configuration: sessionConfiguration).dataTask(with: request) { data, response, error in
             let responseData = try! JSONDecoder().decode(Response.self, from: data!)
             DispatchQueue.main.async {
                 completion(responseData)
@@ -125,12 +142,17 @@ class UserService: ObservableObject {
         }.resume()
     }
     
-    func deleteUser(userEmail: String, completion: @escaping (Response) -> ()) {
+    func deleteUser(userEmail: String, token: String, completion: @escaping (Response) -> ()) {
         let url = URL(string: API().URL_DELETE_USER + userEmail)!
         var request = URLRequest(url: url)
+        let sessionConfiguration = URLSessionConfiguration.default
         
+        sessionConfiguration.httpAdditionalHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
         request.httpMethod = "DELETE"
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        
+        URLSession(configuration: sessionConfiguration).dataTask(with: request) { data, response, error in
             let responseData = try! JSONDecoder().decode(Response.self, from: data!)
             DispatchQueue.main.async {
                 completion(responseData)
