@@ -7,8 +7,11 @@
 
 import Foundation
 
-private let STAGE = "dev"
-private let URL_BASE = "https://0fm6m54ra4.execute-api.us-east-1.amazonaws.com/\(STAGE)"
+public var API_URL: String? {
+    ProcessInfo.processInfo.environment["API_URL"]
+}
+
+private let URL_BASE = API_URL ?? "https://localhost:8000"
 
 struct API {
     let URL_LOGIN = URL_BASE + "/login"
