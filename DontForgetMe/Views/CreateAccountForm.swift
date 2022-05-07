@@ -47,11 +47,10 @@ struct CreateAccountForm: View {
                 RoundedField(inputValue: $phone, fieldLabel: "Phone", placeholder: "1234567891", invalid: !validPhone).padding([.top, .bottom]).keyboardType(.numberPad)
                 RoundedField(inputValue: $password, fieldLabel: "Password", placeholder: "", isPassword: true).padding([.top, .bottom])
                 Button {
-                    hideKeyboard()
                     createAccount()
                 } label: {
                     FillButton(text: "Create Account", color: .blue, maxWidth: true, trailingIcon: true, disabled: !buttonDisabled).padding([.leading, .trailing])
-                }.disabled(buttonDisabled)
+                }.disabled(!buttonDisabled)
             }
         }
     }
