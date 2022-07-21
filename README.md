@@ -1,3 +1,4 @@
+![1024x1024](https://user-images.githubusercontent.com/51935560/180326585-9fbdf5f0-7e4b-47a7-8f1d-d0f07619de90.jpeg)
 # DontForgetMeApp
 DontForgetMe mobile app made in xCode using swift ui.
 This mobile project's API is [DontForgetMeAPI](https://github.com/Mikadifo/DontForgetMeAPI)
